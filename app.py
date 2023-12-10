@@ -1,5 +1,4 @@
 from datetime import datetime
-
 from flask import Flask, render_template, request, jsonify, url_for
 import os
 from flask_sqlalchemy import SQLAlchemy
@@ -10,7 +9,6 @@ app = Flask(__name__)
 app.config['SECRET_KEY'] = 'your_secret_key'
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///' + os.path.join(basedir, 'identifier.db')
 db = SQLAlchemy(app)
-
 
 
 @app.route('/')
@@ -47,9 +45,11 @@ def submit_registration():
 
     return jsonify({'redirect': url_for('show_result_page')})
 
+
 @app.route('/result', methods=['GET'])
 def show_result_page():
     return render_template('pages/result.html')
+
 
 if __name__ == '__main__':
     db.create_all()
