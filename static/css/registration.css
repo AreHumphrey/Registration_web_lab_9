@@ -106,3 +106,7 @@ input[type="submit"] {
 input[type="submit"]:hover {
     background-color: #536932;
 }
+
+input[type=submit] {
+  font-size: 12px;
+}
