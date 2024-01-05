@@ -3,16 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+    <meta http-equiv="refresh" content="5;url=index.html">
     <title>Вход</title>
 </head>
 
 <body>
-<dev class="centered-text">
-    <h2>Поздравляю, вы успешно зарегистрированы,</h2>
-    <h2> вы приглашены на собеседование по
-        <a href="https://yandex.ru/profile/1005801493">адресу</a></h2>
-
-</dev>
+<div class="centered-text">
+    <h2>Поздравляю, {{ user_name }}, вы успешно зарегистрированы!</h2>
+    <h2>Вы приглашены на собеседование по <a href="https://yandex.ru/profile/1005801493">адресу</a>.</h2>
+</div>
 
 </body>
 </html>

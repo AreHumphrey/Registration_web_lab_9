@@ -1,0 +1,137 @@
+body {
+    height: 100vh;
+    background-image: linear-gradient(270deg, #67833f, #3b8358, #2a7a65, #073f48);
+    background-size: 800% 800%;
+    -webkit-animation: AnimationName 30s ease infinite;
+    -moz-animation: AnimationName 30s ease infinite;
+    animation: AnimationName 30s ease infinite;
+}
+
+
+@-webkit-keyframes AnimationName {
+    0% {
+        background-position: 0% 50%
+    }
+    50% {
+        background-position: 100% 50%
+    }
+    100% {
+        background-position: 0% 50%
+    }
+}
+
+@-moz-keyframes AnimationName {
+    0% {
+        background-position: 0% 50%
+    }
+    50% {
+        background-position: 100% 50%
+    }
+    100% {
+        background-position: 0% 50%
+    }
+}
+
+@-o-keyframes AnimationName {
+    0% {
+        background-position: 0% 50%
+    }
+    50% {
+        background-position: 100% 50%
+    }
+    100% {
+        background-position: 0% 50%
+    }
+}
+
+@keyframes AnimationName {
+    0% {
+        background-position: 0% 50%
+    }
+    50% {
+        background-position: 100% 50%
+    }
+    100% {
+        background-position: 0% 50%
+    }
+}
+
+h1 {
+    align-content: center;
+}
+
+h3 {
+    color: #427575;
+    font-size: 18px;
+}
+
+h2 {
+    font-size: 18px;
+    color: #3b8358;
+}
+
+
+a {
+    text-decoration: none;
+    color: #427575;
+}
+
+.a_footer, h2_footer {
+    color: #84abab;
+}
+
+.col-md-8, col-md-4 {
+    margin-top: 10px;
+}
+
+.carousel-inner {
+    margin-bottom: 50px;
+}
+
+.header {
+    background-color: white;
+    color: #3b8358;
+    align-content: center;
+    padding: 10px;
+    text-align: center;
+}
+
+.footer {
+    background-color: white;
+    color: #3b8358;
+    padding: 10px;
+}
+
+.img-styles {
+    width: 300px;
+    height: 200px;
+}
+
+.img-car {
+    width: 800px;
+    height: 400px;
+}
+
+.card {
+    margin-bottom: 20px;
+}
+
+.scrollable-block {
+    height: 200px;
+    overflow: scroll;
+    border: 1px solid #ccc;
+    padding: 10px;
+}
+
+.custom-alert {
+    background-color: #427575;
+    border-color: #427575;
+    color: #292a3b;
+    padding: 10px;
+    margin-bottom: 20px;
+}
+
+.img-styles {
+    border: 2px solid white;
+    padding: 5px;
+}

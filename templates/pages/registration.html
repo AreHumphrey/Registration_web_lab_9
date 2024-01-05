@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/registration.css') }}">
     <title>Регистрация</title>
 </head>
@@ -10,35 +11,96 @@
 <body>
 
 <div class="container">
-    <h2>Регистрация</h2>
     <form id="registrationForm">
-        <label for="first_name">Имя:</label>
-        <input type="text" id="first_name" name="first_name" required placeholder="Иван"><br>
+        <div id="step1" class="step">
+            <h2 class="text-center">Шаг 1</h2>
+            <div class="form-group">
+                <label for="first_name">Имя:</label>
+                <input type="text" class="form-control" id="first_name" name="first_name" required placeholder="Иван">
+            </div>
+            <div class="form-group">
+                <label for="last_name">Фамилия:</label>
+                <input type="text" class="form-control" id="last_name" name="last_name" required placeholder="Иванов">
+            </div>
+            <div class="form-group">
+                <label for="middle_name">Отчество:</label>
+                <input type="text" class="form-control" id="middle_name" name="middle_name" required
+                       placeholder="Иванович">
+            </div>
+            <button class="btn btn-primary next" type="button">Далее</button>
+        </div>
 
-        <label for="last_name">Фамилия:</label>
-        <input type="text" id="last_name" name="last_name" required placeholder="Иванов"><br>
+        <div id="step2" class="step">
+            <h2 class="text-center">Шаг 2</h2>
+            <div class="form-group">
+                <label for="birthday">Дата рождения:</label>
+                <input type="text" class="form-control" id="birthday" name="birthday" required placeholder="2000-00-00">
+            </div>
+            <div class="form-group">
+                <label for="city">Город:</label>
+                <input type="text" class="form-control" id="city" name="city" required placeholder="Москва">
+            </div>
+            <button class="btn btn-primary prev" type="button">Назад</button>
+            <button class="btn btn-primary next" type="button">Далее</button>
+        </div>
 
-        <label for="middle_name">Отчество:</label>
-        <input type="text" id="middle_name" name="middle_name" required placeholder="Иванович"><br>
+        <div id="step3" class="step">
+            <h2 class="text-center">Шаг 3</h2>
+            <div class="form-group">
+                <label for="email">Электронная почта:</label>
+                <input type="email" class="form-control" id="email" name="email" required placeholder="ivanii@mail.ru">
+            </div>
+            <div class="form-group">
+                <label for="phone_number">Номер телефона:</label>
+                <input type="tel" class="form-control" id="phone_number" name="phone_number" required
+                       placeholder="79998888888">
+            </div>
+            <div class="form-group">
+                <label for="password">Пароль:</label>
+                <input type="password" class="form-control" id="password" name="password" required>
+            </div>
+            <button class="btn btn-primary prev" type="button">Назад</button>
+            <button id="registrationButton" type="submit" class="btn btn-primary" style="display: none;">Зарегистрироваться</button>
+        </div>
 
-        <label for="birthday">Дата рождения:</label>
-        <input type="text" id="birthday" name="birthday" required placeholder="Y-m-d"><br>
-
-        <label for="city">Город:</label>
-        <input type="text" id="city" name="city" required placeholder="Москва"><br>
-
-        <label for="email">Электронная почта:</label>
-        <input type="email" id="email" name="email" required placeholder="ivanii@mail.ru"><br>
-
-        <label for="phone_number">Номер телефона:</label>
-        <input type="tel" id="phone_number" name="phone_number" required placeholder="79998888888"><br>
-
-        <input type="submit" value="Зарегистрироваться">
     </form>
     <p id="message"></p>
 </div>
 
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@1.16.1/dist/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
 <script>
+    $(document).ready(function () {
+        $('.step').hide();
+        $('#step1').show();
+
+        $('.next').click(function () {
+            var nextStep = $(this).closest('.step').next('.step');
+            $(this).closest('.step').hide();
+            nextStep.show();
+            if (nextStep.attr('id') === 'step3') {
+                $('#registrationButton').show();
+            } else {
+                $('#registrationButton').hide();
+            }
+        });
+
+        $('.prev').click(function () {
+            var prevStep = $(this).closest('.step').prev('.step');
+            $(this).closest('.step').hide();
+            prevStep.show();
+            if (prevStep.attr('id') === 'step3') {
+                $('#registrationButton').show();
+            } else {
+                $('#registrationButton').hide();
+            }
+        });
+    });
+
+
     document.getElementById('registrationForm').addEventListener('submit', function (event) {
         event.preventDefault();
         var formData = new FormData(this);
@@ -58,6 +120,7 @@
                 console.error('Ошибка:', error);
             });
     });
+
 </script>
 
 </body>

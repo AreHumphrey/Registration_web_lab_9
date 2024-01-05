@@ -8,9 +8,10 @@ class Users(db.Model):
     middle_name = db.Column(db.String(50))
     email = db.Column(db.String(100), unique=True, nullable=False)
     phone_number = db.Column(db.String(20), nullable=False)
+    password = db.Column(db.String(100), nullable=False)
 
 
-class UserDetails(db.Model):
+class User_details(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     birthday = db.Column(db.Date)
     city = db.Column(db.String(100), nullable=False)
