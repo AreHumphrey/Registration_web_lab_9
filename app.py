@@ -107,6 +107,10 @@ def main_page():
 def test():
     return render_template('pages/test.html')
 
+@app.route('/news')
+def news():
+    return render_template('pages/news.html')
+
 if __name__ == '__main__':
     db.create_all()
     app.run()

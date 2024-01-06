@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Тестирование</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/tests.css') }}">
+</head>
+<div id="startText">
+    <p style="color: white">Проверьте свои знания о современной психологии</p>
+</div>
+<body>
+<button type="button" class="btn btn-primary" id="startTestButton">
+    Начать тест
+</button>
+
+<div id="questionContainer" style="display: none;">
+    <h3 id="question"></h3>
+    <div id="options" style="text-align: left;"></div>
+    <div class="buttonContainer">
+        <button id="nextButton">Следующий вопрос</button>
+    </div>
+</div>
+
+<div id="resultContainer" style="display: none;">
+    <h3 id="resultText"></h3>
+</div>
+
+<script>
+    const questions = [
+        {
+            question: "Какое понятие описывает склонность людей отдавать предпочтение информации, подтверждающей их собственные убеждения?",
+            options: ["Подтверждение биас", "Конформный биас", "Подтверждение гипотез", "Благосклонное отношение"],
+            answer: 0
+        },
+
+        {
+            question: "Какое психологическое явление описывает тенденцию людей оценивать свои способности, знания или личностные черты как выше среднего?",
+            options: ["Эффект Даннинга-Крюгера", "Внимательность к подробностям", "Импосторский синдром", "Когнитивная диссонанс"],
+            answer: 0
+        },
+
+        {
+            question: "Как называется теория, описывающая, как люди принимают решения в условиях неопределенности, основываясь на вероятностях и ожиданиях выигрыша или потерь?",
+            options: ["Теория ожидания", "Теория принятия решений", "Теория перспективы", "Теория нерационального выбора"],
+            answer: 2
+        },
+
+         {
+            question: "Какой термин используется для описания явления, при котором участие в групповой деятельности снижает индивидуальную ответственность?",
+            options: ["Групповая норма", "Социальная фасилитация", "Подкрепление", "Размытие ответственности"],
+            answer: 3
+        },
+
+        {
+            question: "Какое понятие описывает тенденцию людей видеть случайные совпадения и причинно-следственные связи там, где их на самом деле нет?",
+            options: ["Подтверждение гипотез", "Обратное ожидание", "Иллюзорная корреляция", "Фундаментальная причинность"],
+            answer: 2
+        },
+
+    ];
+
+    let currentQuestion = 0;
+    let userAnswers = [];
+
+    const startText = document.getElementById('startText');
+    const startTestButton = document.getElementById('startTestButton');
+    const questionContainer = document.getElementById('questionContainer');
+    const resultContainer = document.getElementById('resultContainer');
+
+    startTestButton.addEventListener('click', () => {
+        startText.style.display = "none";
+        startTestButton.style.display = "none";
+        questionContainer.style.display = "block";
+        displayQuestion();
+    });
+
+    function displayQuestion() {
+        const current = questions[currentQuestion];
+        document.getElementById('question').innerHTML = current.question;
+        document.getElementById('options').innerHTML = current.options.map((option, index) => `
+        <input type="radio" name="answer" value="${index}"> ${option}<br>
+    `).join('');
+    }
+
+    document.getElementById('nextButton').addEventListener('click', () => {
+        const selectedAnswer = document.querySelector('input[name="answer"]:checked');
+        if (selectedAnswer) {
+            userAnswers.push(parseInt(selectedAnswer.value));
+            currentQuestion++;
+            if (currentQuestion < questions.length) {
+                displayQuestion();
+            } else {
+                showResult();
+            }
+        } else {
+            alert('Пожалуйста, выберите ответ.');
+        }
+    });
+
+    function showResult() {
+        const score = calculateScore();
+        questionContainer.style.display = "none";
+        resultContainer.style.display = "block";
+        resultContainer.innerHTML = `<h3>Результат: ${score}%</h3><a href="/main"><button id="returnHomeButton">Вернуться на главную</button></a>`;
+
+    }
+
+    function calculateScore() {
+        const totalQuestions = questions.length;
+        const correctAnswers = userAnswers.filter((answer, index) => answer === questions[index].answer).length;
+        return (correctAnswers / totalQuestions) * 100;
+    }
+
+</script>
+</body>
+</html>
+
