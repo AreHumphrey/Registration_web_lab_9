@@ -5,7 +5,7 @@ body {
     justify-content: center;
     align-items: center;
     height: 100vh;
-    background-image: linear-gradient(270deg, #67833f, #3b8358, #2a7a65, #073f48);
+    background-image: linear-gradient(270deg, #67833f, #3b8358, #2a7a65, #073f48, #234370 );
     background-size: 800% 800%;
     -webkit-animation: AnimationName 30s ease infinite;
     -moz-animation: AnimationName 30s ease infinite;
