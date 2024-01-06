@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/news.css') }}">
+    <title>Новости</title>
+</head>
+<body>
+<div style="text-align: center;">
+    <h1>Новости Англии</h1>
+</div>
+<div id="newsList"></div>
+
+<script>
+    const apiKey = 'eGjPJQsGDLZFdagl6YqV8ApTlYBOTRv8';
+    const apiUrl = 'https://api.nytimes.com/svc/news/v3/content/all/all.json';
+
+    fetch(`${apiUrl}?api-key=${apiKey}`)
+    .then(response => response.json())
+    .then(data => {
+        const newsList = document.getElementById('newsList');
+        data.results.forEach(article => {
+            const newsItem = document.createElement('div');
+            newsItem.classList.add('newsItem'); // Добавляем класс для стилизации
+            newsItem.innerHTML = `
+                <h3>${article.title}</h3>
+                <p>${article.abstract}</p>
+                <a href="${article.url}" target="_blank">Подробнее</a>
+            `;
+            newsList.appendChild(newsItem);
+        });
+    })
+    .catch(error => {
+        console.error('Error fetching news:', error);
+    });
+
+</script>
+</body>
+</html>

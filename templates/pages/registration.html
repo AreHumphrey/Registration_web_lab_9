@@ -34,8 +34,9 @@
             <h2 class="text-center">Шаг 2</h2>
             <div class="form-group">
                 <label for="birthday">Дата рождения:</label>
-                <input type="text" class="form-control" id="birthday" name="birthday" required placeholder="2000-00-00">
+                <input type="date" class="form-control" id="birthday" name="birthday" required>
             </div>
+
             <div class="form-group">
                 <label for="city">Город:</label>
                 <input type="text" class="form-control" id="city" name="city" required placeholder="Москва">
@@ -46,21 +47,92 @@
 
         <div id="step3" class="step">
             <h2 class="text-center">Шаг 3</h2>
+
             <div class="form-group">
                 <label for="email">Электронная почта:</label>
-                <input type="email" class="form-control" id="email" name="email" required placeholder="ivanii@mail.ru">
+                <input type="email" class="form-control" id="email" name="email" required placeholder="ivanii@mail.ru"
+                       oninput="checkEmail(this)">
             </div>
+
+
             <div class="form-group">
                 <label for="phone_number">Номер телефона:</label>
                 <input type="tel" class="form-control" id="phone_number" name="phone_number" required
-                       placeholder="79998888888">
+                       placeholder="79998888888" oninput="checkPhoneNumber(this)">
             </div>
+
             <div class="form-group">
                 <label for="password">Пароль:</label>
                 <input type="password" class="form-control" id="password" name="password" required>
             </div>
-            <button class="btn btn-primary prev" type="button">Назад</button>
-            <button id="registrationButton" type="submit" class="btn btn-primary" style="display: none;">Зарегистрироваться</button>
+
+            <div class="form-check">
+                <input type="checkbox" class="form-check-input" id="userAgreementCheckbox" required style="top: 10px">
+                <label class="form-check-label" for="userAgreementCheckbox">Я соглашаюсь с пользовательским
+                    соглашением</label>
+            </div>
+
+            <button id="showUserAgreement" class="btn btn-link" type="button" data-toggle="modal"
+                    data-target="#userAgreementModal" style="margin-top: 10px">Пользовательское соглашение
+            </button>
+
+            <div class="modal" id="userAgreementModal" tabindex="-1" role="dialog">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title">Пользовательское соглашение</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <p>Использование Платформы подразумевает ваше согласие с условиями настоящего
+                                Соглашения.<br>
+                                Если вы не согласны с этими условиями, пожалуйста, не используйте нашу Платформу.<br>
+
+                            <p><strong>2. Принятие условий</strong></p>
+                            <p>Использование Платформы подразумевает ваше согласие с условиями настоящего Соглашения.
+                                Если вы не согласны с этими условиями, пожалуйста, не используйте нашу Платформу.</p>
+                            <p>- Мы несем ответственность за конфиденциальность вашей информации и обязуемся
+                                использовать ее согласно нашей политике конфиденциальности.</p>
+                            <p><strong>3. Права и обязанности</strong></p>
+                            <p>Мы несем ответственность за конфиденциальность вашей информации и обязуемся использовать
+                                ее согласно нашей политике конфиденциальности. Вы соглашаетесь использовать нашу
+                                Платформу только в законных целях и соблюдать действующее законодательство.</p>
+
+                            <p><strong>4. Условия использования</strong></p>
+                            <p>Мы предоставляем вам ограниченную лицензию для использования Платформы на условиях
+                                настоящего Соглашения. Вы обязуетесь не нарушать авторские права, права на товарные
+                                знаки или другие права интеллектуальной собственности, связанные с нашей Платформой.</p>
+
+                            <p><strong>5. Ограничение ответственности</strong></p>
+                            <p>Мы не несем ответственности за ущерб, прямой или косвенный, возникший в результате
+                                использования нашей Платформы.</p>
+
+                            <p><strong>6. Разрешение споров</strong></p>
+                            <p>Любые споры, возникающие в связи с использованием нашей Платформы, подлежат разрешению в
+                                соответствии с действующим законодательством.</p>
+
+                            <p><strong>7. Заключительные положения</strong></p>
+                            <p>Настоящее Соглашение представляет собой полное и окончательное соглашение между вами и
+                                Нашей компанией относительно использования Платформы.</p>
+                            <p>Это лишь пример и не заменяет профессионального юридического консультирования. При
+                                необходимости рекомендуется проконсультироваться с адвокатом для разработки правильного
+                                и конкретного пользовательского соглашения для вашей платформы.</p>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Закрыть</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <button class="btn btn-primary prev" type="button" style="margin-top: 60px">Назад</button>
+
+            <button id="registrationButton" type="submit" class="btn btn-primary" style="display: none;">
+                Зарегистрироваться
+            </button>
+
         </div>
 
     </form>
@@ -73,6 +145,32 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
 <script>
+    function checkPhoneNumber(input) {
+        if (input.value.replace(/\D/g, '').length < 10) {
+            input.classList.add('invalid-phone-number');
+        } else {
+            input.classList.remove('invalid-phone-number');
+        }
+    }
+
+</script>
+
+<script>
+    function checkEmail(input) {
+    const email = input.value;
+    const atIndex = email.indexOf('@');
+    const dotIndex = email.lastIndexOf('.');
+
+    if (atIndex < 1 || dotIndex < atIndex + 2 || dotIndex + 2 >= email.length) {
+        input.classList.add('invalid-email');
+    } else {
+        input.classList.remove('invalid-email');
+    }
+}
+</script>
+
+<script>
+
     $(document).ready(function () {
         $('.step').hide();
         $('#step1').show();
@@ -100,7 +198,6 @@
         });
     });
 
-
     document.getElementById('registrationForm').addEventListener('submit', function (event) {
         event.preventDefault();
         var formData = new FormData(this);
@@ -119,6 +216,12 @@
             .catch(error => {
                 console.error('Ошибка:', error);
             });
+    });
+
+    $(document).ready(function () {
+        $('#showUserAgreement').click(function () {
+            $('#userAgreementModal').modal('show');
+        });
     });
 
 </script>
