@@ -1,0 +1,107 @@
+body {
+    align-items: center;
+    background-image: linear-gradient(270deg, #67833f, #3b8358, #2a7a65, #073f48, #234370);
+    background-size: 800% 800%;
+    -webkit-animation: AnimationName 30s ease infinite;
+    -moz-animation: AnimationName 30s ease infinite;
+    animation: AnimationName 30s ease infinite;
+}
+
+
+@-webkit-keyframes AnimationName {
+    0% {
+        background-position: 0% 50%
+    }
+    50% {
+        background-position: 100% 50%
+    }
+    100% {
+        background-position: 0% 50%
+    }
+}
+
+@-moz-keyframes AnimationName {
+    0% {
+        background-position: 0% 50%
+    }
+    50% {
+        background-position: 100% 50%
+    }
+    100% {
+        background-position: 0% 50%
+    }
+}
+
+@-o-keyframes AnimationName {
+    0% {
+        background-position: 0% 50%
+    }
+    50% {
+        background-position: 100% 50%
+    }
+    100% {
+        background-position: 0% 50%
+    }
+}
+
+@keyframes AnimationName {
+    0% {
+        background-position: 0% 50%
+    }
+    50% {
+        background-position: 100% 50%
+    }
+    100% {
+        background-position: 0% 50%
+    }
+}
+
+.wrapper {
+    max-width: 600px;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+table {
+    background-color: #f2f2f2;
+    width: 100%;
+    border: 2px solid #67833f;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+th {
+    background-color: #f2f2f2;
+    text-align: center;
+    padding: 10px;
+}
+
+td {
+    background-color: #f2f2f2;
+    border: 2px solid #67833f;
+    padding: 10px;
+    text-align: center;
+}
+
+button {
+    padding: 6px 12px;
+    background-color: #67833f;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #073f48;
+}
+
+
+h1 {
+    color: white;
+  text-align: center;
+  margin-top: 20px;
+}
