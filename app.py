@@ -5,6 +5,7 @@ from flask import Flask, render_template, request, jsonify, url_for, session
 import os
 from flask_sqlalchemy import SQLAlchemy
 
+
 basedir = os.path.abspath(os.path.dirname(__file__))
 
 app = Flask(__name__)
@@ -19,6 +20,24 @@ def hash_password(password):
 def main():
     return render_template('pages/main.html')
 
+
+@app.route('/login', methods=['GET'])
+def login_form():
+    return render_template('pages/entrance.html')
+
+@app.route('/submit_login', methods=['POST'])
+def submit_login():
+    from models import Users
+    email = request.form['email']
+    password = request.form['password']
+
+    user = Users.query.filter_by(email=email).first()
+
+    if user and user.password == hash_password(password):
+        session['user_id'] = user.id
+        return jsonify({'redirect': url_for('main_page')})
+    else:
+        return jsonify({'error': 'Неправильный email или пароль'})
 
 @app.route('/registration', methods=['GET'])
 def registration_form():
@@ -66,6 +85,27 @@ def show_result_page():
     user_name = session.get('first_name')
     return render_template('pages/result.html', user_name=user_name)
 
+
+@app.route('/main', methods=['GET', 'POST'])
+def main_page():
+    from models import Users
+    if request.method == 'POST':
+        email = request.form['email']
+        user = Users.query.filter_by(email=email).first()
+
+        if user is None:
+            return "<div class='col-md-4'>Пользователя не существует</div>"
+        else:
+            user.newsletter_subscription = 1
+            db.session.add(user)
+            db.session.commit()
+            return render_template('pages/index.html')
+
+    return render_template('pages/index.html')
+
+@app.route('/tests')
+def test():
+    return render_template('pages/test.html')
 
 if __name__ == '__main__':
     db.create_all()

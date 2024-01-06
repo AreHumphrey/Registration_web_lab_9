@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <meta name="description"
           content="Психологическая помощь">
-    <link rel="stylesheet" type="text/css" href="css/main.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
 </head>
 
 <body>
@@ -218,39 +218,36 @@
 
 
         <div class="col-md-4">
+
             <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
                  aria-hidden="true">
                 <div class="modal-dialog" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLabel">Регистрация</h5>
+                            <h5 class="modal-title" id="exampleModalLabel">Подписка на новости</h5>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                             </button>
                         </div>
-
-
                         <div class="modal-body">
-                            <form>
+                            <form id="subscriptionForm" action="/main" method="post">
                                 <div class="form-group">
                                     <label for="email">Почта</label>
-                                    <input type="email" class="form-control" id="email" aria-describedby="emailHelp"
-                                           placeholder="Введите почту">
+                                    <input type="email" class="form-control" id="email" name="email"
+                                           aria-describedby="emailHelp" placeholder="Введите почту">
                                     <small id="emailHelp" class="form-text text-muted">Нам необходима ваша почта для
-                                        отправления уведомлений о обновлениях </small>
+                                        отправления уведомлений о обновлениях</small>
                                 </div>
                                 <div class="form-group">
                                     <label for="password">Пароль</label>
-                                    <input type="password" class="form-control" id="password"
+                                    <input type="password" class="form-control" id="password" name="password"
                                            placeholder="Введите пароль">
                                 </div>
-                                <button type="submit" class="btn btn-primary"
-                                        style="margin-top: 10px;margin-bottom: 10px; background-color: #427575; border-color: #427575">
-                                    Подписаться
+                                <button type="submit" class="btn btn-primary">Подписаться на
+                                    обновления
                                 </button>
                             </form>
                         </div>
-
                     </div>
                 </div>
             </div>
@@ -310,10 +307,12 @@
                 Новости
             </button>
             <br>
-            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" ,
-                    style="margin-top: 10px;margin-bottom: 10px; background-color: white; border-color: white; color: #2a7a65">
-                Тестирование
-            </button>
+            <a href="/tests">
+                <button type="button" class="btn btn-primary"
+                        style="margin-top: 10px; margin-bottom: 10px; background-color: white; border-color: white; color: #2a7a65">
+                    Тестирование
+                </button>
+            </a>
 
 
         </div>
@@ -335,6 +334,29 @@
         </ul>
     </nav>
 </footer>
+
+<script>
+    function submitForm() {
+        var form = document.getElementById('subscriptionForm');
+        var formData = new FormData(form);
+        fetch('/main', {
+            method: 'POST',
+            body: formData
+        })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                return response.text();
+            })
+            .then(data => {
+                console.log(data);
+            })
+            .catch(error => {
+                console.error('Fetch error:', error);
+            });
+    }
+</script>
 
 
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
