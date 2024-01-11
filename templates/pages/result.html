@@ -8,11 +8,18 @@
 
 <body>
 <div class="centered-text">
-    <h2>Поздравляю, {{ user_name }}, вы успешно зарегистрированы!</h2>
+    <h2>Поздравляю, {{ user_name }} {{ user_fam }}, вы успешно зарегистрированы!</h2>
     <h2>Вы приглашены на собеседование по <a href="https://yandex.ru/profile/1005801493">адресу</a>.</h2>
-     <a href="/main" class="next_button" >Продолжить</a>
+    <p>Ваши данные:</p>
+    <ul>
+        <li>Имя: {{ user_name }}</li>
+        <li>Фамилия: {{ user_fam }}</li>
+        <li>Отчество: {{ user_ot }}</li>
+        <li>Город: {{ user_sity }}</li>
+        <li>Дата рождения: {{ user_bith }}</li>
+        <li>Email: {{ user_email }}</li>
+    </ul>
+    <a href="/main" class="next_button">Продолжить</a></div><br>
 </div>
-
-
 </body>
 </html>

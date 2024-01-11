@@ -22,10 +22,11 @@
         const newsList = document.getElementById('newsList');
         data.results.forEach(article => {
             const newsItem = document.createElement('div');
-            newsItem.classList.add('newsItem'); // Добавляем класс для стилизации
+            newsItem.classList.add('newsItem');
             newsItem.innerHTML = `
                 <h3>${article.title}</h3>
                 <p>${article.abstract}</p>
+                <a href="${article.url}">Полная статья</a><br>
                 <a href="${article.url}" target="_blank">Подробнее</a>
             `;
             newsList.appendChild(newsItem);

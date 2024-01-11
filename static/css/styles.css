@@ -112,3 +112,19 @@ a, a:hover {
     cursor: pointer;
     border-radius: 8px;
   }
+
+ul {
+    list-style-type: none;
+    padding: 0;
+    color: #FFFFFF;
+    font-size: 30px;
+}
+
+ul li {
+    text-align: left;
+}
+
+p {
+   color: #FFFFFF;
+    font-size: 30px;
+}
